@@ -27,14 +27,6 @@
 #                     If disabled, players will be charged the standard transmog price to hide an armor piece.
 #        Default:     1
 #
-#    Transmog.EnableInfo
-#        Description: Enables / Disables the info button for transmogrification
-#        Default:    1
-#
-#    Transmog.NpcText
-#        Description: The npc_text entry of the info menu for transmogrification
-#        Default:    601085
-#
 #    Transmog.Allowed
 #        Description: A list of item entries that are allowed for transmogrification (skips quality and CanUseItem check)
 #                     Example: "25 35674 5623"
@@ -50,8 +42,6 @@ Transmog.Enable = 1
 Transmog.PriceCopper = 1000
 Transmog.AllowHiddenTransmog = 1
 Transmog.HiddenTransmogIsFree = 1
-Transmog.EnableInfo = 1
-Transmog.NpcText = 601085
 Transmog.Allowed = ""
 Transmog.NotAllowed = ""
 

@@ -6,8 +6,6 @@ void Transmog::LoadConfig()
     PriceCopper = sConfigMgr->GetOption<uint32>("Transmog.PriceCopper", 1000);
     AllowHiddenTransmog = sConfigMgr->GetOption<bool>("Transmog.AllowHiddenTransmog", true);
     HiddenTransmogIsFree = sConfigMgr->GetOption<bool>("Transmog.HiddenTransmogIsFree", true);
-    EnableInfo = sConfigMgr->GetOption<bool>("Transmog.EnableInfo", true);
-    NpcText = sConfigMgr->GetOption<uint32>("Transmog.NpcText", 601085);
 
     Allowed.clear();
     NotAllowed.clear();

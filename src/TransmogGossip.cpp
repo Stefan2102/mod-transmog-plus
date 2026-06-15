@@ -86,9 +86,6 @@ public:
         WorldSession* session = player->GetSession();
         sTransmog->ClearSelection(player->GetGUID());
 
-        if (sTransmog->EnableInfo)
-            AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/INV_Misc_Book_11:30:30:-18:0|t" + Tstr(session, LANG_TRANSMOG_HOWWORKS), MENU_INFO, 0);
-
         for (uint8 slot = EQUIPMENT_SLOT_START; slot < EQUIPMENT_SLOT_END; ++slot)
         {
             std::string const slotName = Transmog::GetSlotName(slot);
@@ -99,7 +96,7 @@ public:
         }
 
         AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/INV_Enchant_Disenchant:30:30:-18:0|t" + Tstr(session, LANG_TRANSMOG_REMOVE_ALL), MENU_REMOVE_ALL, 0, Tstr(session, LANG_TRANSMOG_REMOVE_ALL_ASK), 0, false);
-        SendGossipMenuFor(player, DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
+        SendGossipMenuFor(player, 601084, creature->GetGUID());
         return true;
     }
 
@@ -130,10 +127,6 @@ public:
                 sTransmog->RefreshSlot(player, sTransmog->GetSelectedSlot(guid));
                 ChatHandler(session).SendNotification(Tstr(session, LANG_TRANSMOG_SLOT_REMOVED));
                 ShowSourceList(player, creature, 0);
-                break;
-            case MENU_INFO:
-                AddGossipItemFor(player, GOSSIP_ICON_MONEY_BAG, "|TInterface/ICONS/Ability_Spy:30:30:-18:0|t" + Tstr(session, LANG_TRANSMOG_BACK), MENU_MAIN, 0);
-                SendGossipMenuFor(player, sTransmog->NpcText, creature->GetGUID());
                 break;
             case MENU_PAGE:
                 ShowSourceList(player, creature, action);

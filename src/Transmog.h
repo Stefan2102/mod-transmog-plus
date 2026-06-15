@@ -20,7 +20,7 @@
 #include <shared_mutex>
 #include <mutex>
 
-constexpr uint32 HIDDEN_ITEM_ID = 1;
+constexpr uint32 HIDDEN_ITEM_ID = 999999;
 constexpr uint8 MAX_ITEMS_PER_PAGE = 20;
 
 enum MenuId : uint32
@@ -30,7 +30,6 @@ enum MenuId : uint32
     MENU_HIDE_SLOT,
     MENU_REMOVE_SLOT,
     MENU_REMOVE_ALL,
-    MENU_INFO,
     MENU_APPLY,
     MENU_PAGE
 };
@@ -44,7 +43,6 @@ enum TransmogString : uint32
     LANG_TRANSMOG_HIDDEN,
     LANG_TRANSMOG_SLOT_REMOVED,
     LANG_TRANSMOG_NO_MONEY,
-    LANG_TRANSMOG_HOWWORKS,
     LANG_TRANSMOG_REMOVE_ALL,
     LANG_TRANSMOG_REMOVE_ALL_ASK,
     LANG_TRANSMOG_BACK,
@@ -73,8 +71,6 @@ public:
     uint32 PriceCopper;
     bool AllowHiddenTransmog;
     bool HiddenTransmogIsFree;
-    bool EnableInfo;
-    uint32 NpcText;
 
     std::set<uint32> Allowed;
     std::set<uint32> NotAllowed;

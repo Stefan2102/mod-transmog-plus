@@ -115,7 +115,7 @@ uint32 Transmog::GetVisibleEntryForSlot(Player const* player, uint8 slot, Item c
     if (fakeEntry == 0)
         return item->GetEntry();
     if (fakeEntry == HIDDEN_ITEM_ID)
-        return TransmogRules_IsArmorSlot(slot) ? 0 : item->GetEntry();
+        return TransmogRules_IsArmorSlot(slot) ? HIDDEN_ITEM_ID : item->GetEntry();
 
     ItemTemplate const* sourceTemplate = sObjectMgr->GetItemTemplate(fakeEntry);
     if (sourceTemplate && TransmogRules_CanTransmogrifyItemWithItem(player, item->GetTemplate(), sourceTemplate))
