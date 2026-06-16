@@ -31,7 +31,7 @@ Features:
 
 4. Rebuild AzerothCore. CMake auto-discovers the module.
 
-5. Spawn the NPC in-game. The world SQL already places Warpweavers in Stormwind and Orgrimmar. To add one at your current location, use:
+5. After the server starts, spawn the NPC in-game:
    ```
    .npc add 190012
    ```

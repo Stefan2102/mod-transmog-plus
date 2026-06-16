@@ -45,8 +45,3 @@ INSERT INTO `module_string` (`module`, `id`, `string`) VALUES
 ('mod-transmog', 15, 'No valid appearances found for this slot.'),
 ('mod-transmog', 16, 'This item\'s appearance has been added to your collection.'),
 ('mod-transmog', 17, 'Free');
-
-DELETE FROM `creature` WHERE (`id1` = 190012);
-INSERT INTO `creature` (`guid`, `id1`, `id2`, `id3`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`, `VerifiedBuild`, `CreateObject`, `Comment`) VALUES
-(9000000, 190012, 0, 0, 1, 0, 0, 1, 1, 0, 1542.61, -4372.89, 0.617466, 6.12055, 300, 0, 0, 12600, 0, 0, 0, 0, 0, '', NULL, 0, NULL),
-(9000001, 190012, 0, 0, 0, 0, 0, 1, 1, 0, -8805.33, 622.176, 94.8956, 2.27093, 300, 0, 0, 12600, 0, 0, 0, 0, 0, '', NULL, 0, NULL);
