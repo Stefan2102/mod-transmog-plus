@@ -1,6 +1,6 @@
 # mod-transmog
 
-Slot-based transmogrification module for AzerothCore based on azerothcore/mod-transmog.
+Slot-based transmogrification module for [AzerothCore](https://github.com/azerothcore/azerothcore-wotlk) based on [azerothcore/mod-transmog](https://github.com/azerothcore/mod-transmog).
 
 Based on the official [azerothcore/mod-transmog](https://github.com/azerothcore/mod-transmog). The main difference is that appearances are stored per `(player, equipment slot)` instead of per item GUID, so the look stays when you equip a new item in the same slot. 
 
