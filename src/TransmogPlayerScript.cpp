@@ -69,6 +69,9 @@ public:
         if (itemTemplate->Class != ITEM_CLASS_ARMOR && itemTemplate->Class != ITEM_CLASS_WEAPON)
             return;
 
+        if (TransmogRules_CanNeverTransmog(itemTemplate))
+            return;
+
         uint32 accountId = player->GetSession()->GetAccountId();
         uint32 itemId = itemTemplate->ItemId;
 
