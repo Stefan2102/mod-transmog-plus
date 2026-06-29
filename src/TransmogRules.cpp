@@ -184,7 +184,8 @@ bool TransmogRules_CanNeverTransmog(ItemTemplate const* proto)
         proto->InventoryType == INVTYPE_FINGER ||
         proto->InventoryType == INVTYPE_TRINKET ||
         proto->InventoryType == INVTYPE_AMMO ||
-        proto->InventoryType == INVTYPE_QUIVER;
+        proto->InventoryType == INVTYPE_QUIVER ||
+        proto->InventoryType == INVTYPE_NECK;
 }
 
 // ==========================================
