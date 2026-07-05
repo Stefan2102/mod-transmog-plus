@@ -7,33 +7,27 @@ Features:
 - Slot-based transmog — appearances stay on the equipment slot when you swap gear.
 - Account-wide collection — any appearance unlocked by one character is available to all characters on the account.
 - Appearances unlock when you equip an item, not when it enters your inventory.
-- Flat copper cost per transmog application, fully configurable.
-- Option to hide individual armor slots (helm, shoulders, chest, etc.). Configurable as free or paid.
-- Empty-slot transmog — appearances can be applied to slots even when nothing is equipped. The stored look only renders once an item is placed in the slot and is valid for it. Incompatible appearances are ignored and the real item is shown instead.
+- Option to hide individual armor slots (helm, shoulders, chest, etc.).
+- Empty-slot pre-transmog — Allows queuing an appearance on a slot before equipping gear. The look is purely stored and will not render while the slot is empty; it automatically activates only when a compatible item is placed in that slot. Incompatible items will simply render normally.
 
 ## Installation
 
-1. Copy this folder into your AzerothCore `modules/` directory:
-
-   ```
-   azerothcore-wotlk/
-   └── modules/
-        └── mod-transmog-plus/
-   ```
-
-2. Apply the SQL files:
+1. Place the module under the `modules/` folder of your AzerothCore source directory. You can clone it directly using git:
 
    ```bash
-    mysql -u acore -p acore_characters < data/sql/characters/mod_transmog_plus_characters.sql
-    mysql -u acore -p acore_world     < data/sql/world/mod_transmog_plus_world.sql
+   cd path/to/azerothcore/modules
+   git clone https://github.com/Stefan2102/mod-transmog-plus.git
    ```
 
-3. Copy `conf/mod_transmog_plus.conf.dist` to your server's modules config folder and remove `.dist`.
+2. Manually import the SQL files to the correct databases (`acore_characters` and `acore_world`).
 
-4. Rebuild AzerothCore. CMake auto-discovers the module.
+3. Re-run CMake and launch a clean build of your AzerothCore server to compile the module.
 
-5. After the server starts, spawn the NPC in-game:
-   ```
+4. Copy `conf/mod_transmog_plus.conf.dist` to `mod_transmog_plus.conf` and adjust values as needed.
+
+5. After the server starts, log in with a GM account, go to your desired location, and spawn the Transmog NPC using this command:
+
+   ```text
    .npc add 190012
    ```
 
