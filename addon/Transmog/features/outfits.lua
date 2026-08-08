@@ -46,6 +46,43 @@ function OutfitsDropDown_Initialize()
 
 end
 
+-- Uses the server-filtered appearance bucket to keep saved outfits aligned with
+-- the active transmog configuration and the item currently equipped in a slot.
+function Transmog:IsOutfitAppearanceCompatible(slot, itemID)
+    if itemID == 0 then
+        return true
+    end
+
+    if itemID == self.HIDDEN_ITEM_ID then
+        return self.hideableSlots[slot] == true
+    end
+
+    local equippedLink = GetInventoryItemLink('player', slot)
+    if not equippedLink then
+        return false
+    end
+
+    local _, _, _, _, _, itemClass, itemSubclass = GetItemInfo(equippedLink)
+    if not itemClass or not itemSubclass then
+        return false
+    end
+
+    local bucket = self:ItemClassStrToNum(itemClass) + self:ItemSubclassStrToNum(itemSubclass)
+    local slotData = self.transmogDataFromServer[slot]
+    local appearances = slotData and slotData[bucket]
+    if not appearances then
+        return false
+    end
+
+    for _, appearanceID in ipairs(appearances) do
+        if tonumber(appearanceID) == itemID then
+            return true
+        end
+    end
+
+    return false
+end
+
 -- Loads a saved outfit's transmog selections onto all equipment slots.
 function Transmog_LoadOutfit(self, outfit)
     UIDropDownMenu_SetText(TransmogFrameOutfits, outfit)
@@ -59,6 +96,10 @@ function Transmog_LoadOutfit(self, outfit)
     Transmog:hideItemBorders()
 
     for slot, itemID in pairs(transmogOutfits[outfit]) do
+
+        if not Transmog:IsOutfitAppearanceCompatible(slot, itemID) then
+            twfdebug("Skipping incompatible outfit appearance " .. itemID .. " for slot " .. slot)
+        else
 
         local eq_slot, tex
         local hasItemEquipped = false
@@ -82,7 +123,7 @@ function Transmog_LoadOutfit(self, outfit)
 
             local frame
 
-            frame = Transmog:frameFromInvType(eq_slot)
+            frame = Transmog:frameFromInvType(eq_slot, slot)
 
             if hasItemEquipped then
                 TransmogFramePlayerModel:TryOn(itemID)
@@ -108,6 +149,8 @@ function Transmog_LoadOutfit(self, outfit)
             if frame then
                 Transmog:UpdateSlotGlow(frame:GetName(), slot)
             end
+        end
+
         end
 
     end
