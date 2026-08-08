@@ -89,13 +89,15 @@ function Transmog_Try(itemId, slotName, newReset)
 
         Transmog.transmogStatusToServer[InventorySlotId] = 0
 
-        getglobal(slotName .. 'BorderHi'):Hide()
         getglobal(slotName .. 'AutoCast'):Hide()
 
         if Transmog.transmogStatusFromServer[InventorySlotId] ~= Transmog.transmogStatusToServer[InventorySlotId] then
+            getglobal(slotName .. 'BorderHi'):Show()
             getglobal(slotName .. 'AutoCast'):SetAlpha(0.3)
-            -- AutoCast glow doesn't reliably respect SetAlpha; BorderHi alone conveys pending-change state.
+        else
+            getglobal(slotName .. 'BorderHi'):Hide()
         end
+        Transmog:UpdateSlotGlow(slotName, InventorySlotId)
 
         Transmog:RefreshPreviewModel()
 
@@ -125,6 +127,8 @@ function Transmog_Try(itemId, slotName, newReset)
         Transmog.transmogStatusToServer[Transmog.currentTransmogSlot] = itemId
     end
 
+    Transmog:UpdateSlotGlow(Transmog.currentTransmogSlotName, Transmog.currentTransmogSlot)
+
     for itemIndex, data in ipairs(Transmog.ItemButtons) do
         getglobal('TransmogLook' .. itemIndex .. 'Button'):SetNormalTexture('Interface\\AddOns\\Transmog\\assets\\item_bg_normal')
         if data.id == itemId then
@@ -136,7 +140,6 @@ function Transmog_Try(itemId, slotName, newReset)
 
     if Transmog.transmogStatusFromServer[Transmog.currentTransmogSlot] ~= Transmog.transmogStatusToServer[Transmog.currentTransmogSlot] then
         getglobal(Transmog.currentTransmogSlotName .. 'AutoCast'):SetAlpha(0.3)
-        -- AutoCast glow doesn't reliably respect SetAlpha; BorderHi alone conveys pending-change state.
     end
 
     Transmog:RefreshPreviewModel()
@@ -262,7 +265,12 @@ function Transmog_ChangePage(dir)
         end
 
         local totalPages = math.max(1, Transmog.totalPages or 1)
-        Transmog.currentPage = math.max(1, math.min(Transmog.currentPage + dir, totalPages))
+        local nextPage = math.max(1, math.min(Transmog.currentPage + dir, totalPages))
+        if nextPage ~= Transmog.currentPage then
+            PlaySound("igAbiliityPageTurn")
+        end
+
+        Transmog.currentPage = nextPage
         Transmog:renderAvailableTransmogs(Transmog.currentTransmogSlot, Transmog.currentTransmogItemClass)
     else
         Transmog_switchTab(Transmog.tab)

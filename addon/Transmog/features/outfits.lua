@@ -95,7 +95,6 @@ function Transmog_LoadOutfit(self, outfit)
                 if Transmog.transmogStatusToServer[slot] ~= itemID then
                     getglobal(frame:GetName() .. 'BorderHi'):Show()
                     getglobal(frame:GetName() .. 'AutoCast'):SetAlpha(0.3)
-                    -- AutoCast glow doesn't reliably respect SetAlpha; BorderHi alone conveys pending-change state.
                 end
 
                 if itemID == 0 or not hasItemEquipped then
@@ -106,7 +105,9 @@ function Transmog_LoadOutfit(self, outfit)
             end
 
             Transmog.transmogStatusToServer[slot] = itemID
-
+            if frame then
+                Transmog:UpdateSlotGlow(frame:GetName(), slot)
+            end
         end
 
     end

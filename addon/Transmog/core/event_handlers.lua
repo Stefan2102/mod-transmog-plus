@@ -155,8 +155,8 @@ Transmog:SetScript("OnEvent", function()
 								end
 							end
 						end
-
-						Transmog:transmogStatus()
+                        Transmog:RefreshPendingGlows()
+                        Transmog:transmogStatus()
 					end
 					return
 				end

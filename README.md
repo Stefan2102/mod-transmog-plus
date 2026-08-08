@@ -19,9 +19,6 @@ gossip menu is used as a fallback.
 
 ![Addon UI](docs/addon_preview.png)
 
-Known addon issues:
-- Icon glow border for pending transmog slots not working.
-
 ## Installation
 
 1. Place the module under the `modules/` folder of your AzerothCore source directory.

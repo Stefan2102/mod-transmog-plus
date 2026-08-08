@@ -1,6 +1,67 @@
 local Transmog = _G.Transmog
 local TransmogFrame_Find = string.find
 local GAME_YELLOW = "|cffffd200"
+Transmog.slotGlowFrames = {}
+
+-- Returns the native glow frame associated with an equipment slot.
+function Transmog:GetSlotGlowFrame(slotName)
+    local glow = self.slotGlowFrames[slotName]
+    if glow then
+        return glow
+    end
+
+    local anchor = getglobal(slotName)
+    if not anchor then
+        return nil
+    end
+
+    glow = CreateFrame("Frame", "Transmog" .. slotName .. "SlotGlow", anchor, "AutoCastShineTemplate")
+    glow:SetFrameStrata("HIGH")
+    glow:SetWidth(30)
+    glow:SetHeight(30)
+    glow:SetPoint("CENTER", anchor, "CENTER", -3, 2)
+    glow:Hide()
+
+    self.slotGlowFrames[slotName] = glow
+    return glow
+end
+
+-- Shows the gold native glow for an active or modified equipment slot.
+function Transmog:ShowSlotGlow(slotName)
+    local glow = self:GetSlotGlowFrame(slotName)
+    if glow then
+        AutoCastShine_AutoCastStart(glow, 1, 0.82, 0.1)
+        glow:Show()
+    end
+end
+
+-- Hides the native glow for one equipment slot.
+function Transmog:HideSlotGlow(slotName)
+    local glow = self.slotGlowFrames[slotName]
+    if glow then
+        AutoCastShine_AutoCastStop(glow)
+        glow:Hide()
+    end
+end
+
+-- Updates the native glow from the local/server transmog state.
+function Transmog:UpdateSlotGlow(slotName, slotId)
+    local serverItem = self.transmogStatusFromServer[slotId]
+    local localItem = self.transmogStatusToServer[slotId]
+    if serverItem ~= nil and localItem ~= nil and serverItem ~= localItem then
+        self:ShowSlotGlow(slotName)
+    else
+        self:HideSlotGlow(slotName)
+    end
+end
+
+-- Reconciles all equipment-slot glows with pending transmog changes.
+function Transmog:RefreshPendingGlows()
+    for slotName, slotId in pairs(self.inventorySlots) do
+        self:UpdateSlotGlow(slotName, slotId)
+    end
+end
+
 
 -- Queues a slot for the apply/reset animation sequence.
 function Transmog:addTransmogAnim(id, reset)
@@ -42,9 +103,10 @@ function Transmog:HidePlayerItemsAnimation()
     MainHandSlotAutoCast:Hide()
     SecondaryHandSlotAutoCast:Hide()
     RangedSlotAutoCast:Hide()
+    self:RefreshPendingGlows()
 end
 
--- Hides selection border overlays on all equipment slots.
+-- Hides selection borders while retaining state-based pending glows.
 function Transmog:hidePlayerItemsBorders()
     HeadSlotBorderSelected:Hide()
     ShoulderSlotBorderSelected:Hide()
@@ -58,6 +120,7 @@ function Transmog:hidePlayerItemsBorders()
     MainHandSlotBorderSelected:Hide()
     SecondaryHandSlotBorderSelected:Hide()
     RangedSlotBorderSelected:Hide()
+    self:RefreshPendingGlows()
 end
 
 -- Disables and desaturates all player equipment slots during gear changes.

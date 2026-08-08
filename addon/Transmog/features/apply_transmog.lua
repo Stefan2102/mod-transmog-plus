@@ -158,9 +158,11 @@ function Transmog:ApplyTransmogResult(success, data)
 
 			Transmog.transmogStatusFromServer[slot] = itemID
 			Transmog.transmogStatusToServer[slot] = itemID
-		end
-		Transmog.pendingApplyCount = Transmog.pendingApplyCount - 1
-		if Transmog.pendingApplyCount <= 0 then
+        end
+
+        Transmog:RefreshPendingGlows()
+        Transmog.pendingApplyCount = Transmog.pendingApplyCount - 1
+        if Transmog.pendingApplyCount <= 0 then
 			PlaySoundFile("Interface\\AddOns\\Transmog\\assets\\ui_transmogrify_apply.ogg", "Dialog");
 			Transmog:transmogStatus()
 		end
