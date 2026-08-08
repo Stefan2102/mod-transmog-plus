@@ -8,6 +8,7 @@ core\constants.lua
 core\logging.lua
 core\helpers.lua
 features\item_cache.lua
+features\collection_tooltips.lua
 features\addon_protocol.lua
 features\apply_transmog.lua
 features\outfits.lua

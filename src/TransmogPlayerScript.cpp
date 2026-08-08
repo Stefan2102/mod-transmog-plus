@@ -1,4 +1,5 @@
 #include "Transmog.h"
+#include "TransmogAddonProtocol.h"
 #include "Chat.h"
 
 // Player hooks maintain account collections and slot state across lifecycle events.
@@ -66,6 +67,7 @@ public:
         if (sTransmog->AddCollectedAppearance(accountId, itemId))
         {
             CharacterDatabase.Execute("INSERT INTO mod_transmog_plus_appearances (account_id, item_template_id) VALUES ({}, {})", accountId, itemId);
+            TransmogAddon::SendCollectionUpdated(player, itemId);
             ChatHandler(player->GetSession()).PSendSysMessage("{} {}", Transmog::GetItemLink(itemId, player->GetSession()), Tstr(player->GetSession(), LANG_TRANSMOG_APPEARANCE_ADDED));
         }
     }
