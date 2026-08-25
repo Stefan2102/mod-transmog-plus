@@ -139,54 +139,57 @@ end
 -- Converts an item subclass string to its numeric ID, including localized names.
 function Transmog:ItemSubclassStrToNum(itemSubclassStr)
 	local itemSubclass = -1
-
+	
 	if itemSubclassStr then
-		if itemSubclassStr == "One-Handed Axes" or itemSubclassStr == "Hachas de una mano" then
+		if itemSubclassStr == "One-Handed Axes" or itemSubclassStr == "Hachas de una mano" or itemSubclassStr == "Einhandäxte" then
 			itemSubclass = 0
-		elseif itemSubclassStr == "Two-Handed Axes" or itemSubclassStr == "Hachas de dos manos" then
+		elseif itemSubclassStr == "Two-Handed Axes" or itemSubclassStr == "Hachas de dos manos" or itemSubclassStr == "Zweihandäxte" then
 			itemSubclass = 1
-		elseif itemSubclassStr == "Bows" or itemSubclassStr == "Arcos" then
+		elseif itemSubclassStr == "Bows" or itemSubclassStr == "Arcos" or itemSubclassStr == "Bögen" then
 			itemSubclass = 2
-		elseif itemSubclassStr == "Guns" or itemSubclassStr == "Armas de fuego" then
+		elseif itemSubclassStr == "Guns" or itemSubclassStr == "Armas de fuego" or itemSubclassStr == "Schusswaffen" then
 			itemSubclass = 3
-		elseif itemSubclassStr == "One-Handed Maces" or itemSubclassStr == "Mazas de una mano" then
+		elseif itemSubclassStr == "One-Handed Maces" or itemSubclassStr == "Mazas de una mano" or itemSubclassStr == "Einhandstreitkolben" then
 			itemSubclass = 4
-		elseif itemSubclassStr == "Two-Handed Maces" or itemSubclassStr == "Mazas de dos manos" then
+		elseif itemSubclassStr == "Two-Handed Maces" or itemSubclassStr == "Mazas de dos manos" or itemSubclassStr == "Zweihandstreitkolben" then
 			itemSubclass = 5
-		elseif itemSubclassStr == "Polearms" or itemSubclassStr == "Armas de asta" then
+		elseif itemSubclassStr == "Polearms" or itemSubclassStr == "Armas de asta" or itemSubclassStr == "Stangenwaffen" then
 			itemSubclass = 6
-		elseif itemSubclassStr == "One-Handed Swords" or itemSubclassStr == "Espadas de una mano" then
+		elseif itemSubclassStr == "One-Handed Swords" or itemSubclassStr == "Espadas de una mano" or itemSubclassStr == "Einhandschwerter" then
 			itemSubclass = 7
-		elseif itemSubclassStr == "Two-Handed Swords" or itemSubclassStr == "Espadas de dos manos" then
+		elseif itemSubclassStr == "Two-Handed Swords" or itemSubclassStr == "Espadas de dos manos" or itemSubclassStr == "Zweihandschwerter" then
 			itemSubclass = 8
-		elseif itemSubclassStr == "Staves" or itemSubclassStr == "Bastones" then
+		elseif itemSubclassStr == "Staves" or itemSubclassStr == "Bastones" or itemSubclassStr == "Stäbe" then
 			itemSubclass = 10
-		elseif itemSubclassStr == "Fist Weapons" or itemSubclassStr == "Armas de puño" then
+		elseif itemSubclassStr == "Fist Weapons" or itemSubclassStr == "Armas de puño" or itemSubclassStr == "Faustwaffen" then
 			itemSubclass = 13
-		elseif itemSubclassStr == "Daggers" or itemSubclassStr == "Dagas" then
+		elseif itemSubclassStr == "Daggers" or itemSubclassStr == "Dagas" or itemSubclassStr == "Dolche" then
 			itemSubclass = 15
-		elseif itemSubclassStr == "Crossbows" or itemSubclassStr == "Ballestas" then
+		elseif itemSubclassStr == "Crossbows" or itemSubclassStr == "Ballestas" or itemSubclassStr == "Armbrüste" then
 			itemSubclass = 18
-		elseif itemSubclassStr == "Wands" or itemSubclassStr == "Varitas" then
+		elseif itemSubclassStr == "Wands" or itemSubclassStr == "Varitas" or itemSubclassStr == "Zauberstäbe" then
 			itemSubclass = 19
-		elseif itemSubclassStr == "Cloth" or itemSubclassStr == "Tela" then
+		elseif itemSubclassStr == "Thrown" or itemSubclassStr == "Armas arrojadizas" or itemSubclassStr == "Wurfwaffen" then
+	        itemSubclass = 20
+		elseif itemSubclassStr == "Cloth" or itemSubclassStr == "Tela" or itemSubclassStr == "Stoff" then
 			itemSubclass = 1
-		elseif itemSubclassStr == "Leather" or itemSubclassStr == "Cuero" then
+		elseif itemSubclassStr == "Leather" or itemSubclassStr == "Cuero" or itemSubclassStr == "Leder" then
 			itemSubclass = 2
-		elseif itemSubclassStr == "Mail" or itemSubclassStr == "Malla" then
+		elseif itemSubclassStr == "Mail" or itemSubclassStr == "Malla" or itemSubclassStr == "Kette" then
 			itemSubclass = 3
-		elseif itemSubclassStr == "Plate" or itemSubclassStr == "Placas" then
+		elseif itemSubclassStr == "Plate" or itemSubclassStr == "Placas" or itemSubclassStr == "Plattenrüstung" then
 			itemSubclass = 4
-		elseif itemSubclassStr == "Shields" or itemSubclassStr == "Escudos" then
+		elseif itemSubclassStr == "Shields" or itemSubclassStr == "Escudos" or itemSubclassStr == "Schilde" then
 			itemSubclass = 6
-		elseif itemSubclassStr == "Miscellaneous" or itemSubclassStr == "Misceláneo" then
+		elseif itemSubclassStr == "Miscellaneous" or itemSubclassStr == "Misceláneo" or itemSubclassStr == "Verschiedenes" then
 			itemSubclass = 0
 		end
 	end
-
+	
 	if itemSubclass == -1 then
 		twferror("Invalid item subclass " .. itemSubclassStr)
 	end
-
+	
 	return itemSubclass
 end
+
